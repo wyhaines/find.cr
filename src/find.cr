@@ -10,14 +10,15 @@ module Find
       search_path = [path]
       while !search_path.empty?
         file = search_path.shift
-        skip = yield file.dup
-        next if skip == Find::Skip
 
         begin
           next unless !file.nil? && File.exists?(file)
         rescue
           next
         end
+
+        skip = yield file.dup
+        next if skip == Find::Skip
 
         if File.directory?(file)
           begin

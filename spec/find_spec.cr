@@ -10,6 +10,7 @@ def make_tmpdir(path : String? | Path = nil)
     dirname = File.join(Dir.tempdir, path)
   end
   Dir.mkdir dirname
+
   dirname
 rescue
   nil
@@ -21,7 +22,6 @@ def with_tmpdir(path : Nil | String | Path = nil, &blk : String ->)
     Dir.open(tempdir) { blk.call(tempdir) }
   end
 ensure
-  # FileUtils.rm_rf(tmpdir) if tmpdir && tmpdir.open?
   FileUtils.rm_rf tempdir if !tempdir.nil? && File.exists?(tempdir) && File.directory?(tempdir)
 end
 
@@ -35,5 +35,52 @@ describe Find do
   end
 
   it "works if asked to find something that does not exist" do
+    with_tmpdir do |tempdir|
+      a = [] of String
+      Find.find(File.join(tempdir, "a")) { |f| a << f }
+      a.empty?.should be_true
+    end
+  end
+
+  it "finds the expected set of files in a multilevel directory structure" do
+    with_tmpdir do |tempdir|
+      File.open("#{tempdir}/a", "w") { }
+      Dir.mkdir("#{tempdir}/b")
+      File.open("#{tempdir}/b/a", "w") { }
+      File.open("#{tempdir}/b/b", "w") { }
+      Dir.mkdir("#{tempdir}/c")
+      a = [] of String?
+      Find.find(tempdir) { |f| a << f }
+      a.should eq [tempdir, "#{tempdir}/a", "#{tempdir}/b", "#{tempdir}/b/a", "#{tempdir}/b/b", "#{tempdir}/c"]
+    end
+  end
+
+  it "deals with relative paths correctly" do
+    with_tmpdir do |tempdir|
+      File.open("#{tempdir}/a", "w") { }
+      Dir.mkdir("#{tempdir}/b")
+      File.open("#{tempdir}/b/a", "w") { }
+      File.open("#{tempdir}/b/b", "w") { }
+      Dir.mkdir("#{tempdir}/c")
+      a = [] of String?
+      Dir.cd(tempdir) { Find.find(".") { |f| a << f } }
+      a.should eq [".", "./a", "./b", "./b/a", "./b/b", "./c"]
+    end
+  end
+
+  it "can prune entries out of the list of paths" do
+    with_tmpdir do |tempdir|
+      File.open("#{tempdir}/a", "w"){}
+      Dir.mkdir("#{tempdir}/b")
+      File.open("#{tempdir}/b/a", "w"){}
+      File.open("#{tempdir}/b/b", "w"){}
+      Dir.mkdir("#{tempdir}/c")
+      a = [] of String?
+      Find.find(tempdir) do |f|
+        a << f
+        Find.prune if f == "#{tempdir}/b"
+      end
+      a.should eq [tempdir, "#{tempdir}/a", "#{tempdir}/b", "#{tempdir}/c"]
+    end
   end
 end
