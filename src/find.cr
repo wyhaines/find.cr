@@ -2,7 +2,7 @@ module Find
   struct Skip; end
 
   macro prune
-     next Find::Skip
+    next Find::Skip
   end
 
   def self.find(*paths)
