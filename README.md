@@ -1,6 +1,6 @@
 # find.cr
 
-![SplayTreeMap CI](https://img.shields.io/github/workflow/status/wyhaines/find.cr/SplayTreeMap%20CI?style=for-the-badge&logo=GitHub)
+![SplayTreeMap CI](https://img.shields.io/github/workflow/status/wyhaines/find.cr/Find.cr%20CI?style=for-the-badge&logo=GitHub)
 [![GitHub release](https://img.shields.io/github/release/wyhaines/find.cr.svg?style=for-the-badge)](https://github.com/wyhaines/find.cr/releases)
 ![GitHub commits since latest release (by SemVer)](https://img.shields.io/github/commits-since/wyhaines/find.cr/latest?style=for-the-badge)
 
