@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.35.1">
+<meta name="crystal_docs.project_version" content="1.0.0">
+<meta name="crystal_docs.project_name" content="find">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="find">
+  <title>find 1.0.0</title>
+  <script type="text/javascript">
+  CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          find
+        </a>
+      </h1>
+
+      <span class="project-version">
+        1.0.0
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="find/Find" data-name="find">
+      <a href="Find.html">Find</a>
+      
+        <ul>
+  
+  <li class=" " data-id="find/Find/Skip" data-name="find::skip">
+      <a href="Find/Skip.html">Skip</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="find.cr" class="anchor" href="#find.cr">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>find.cr</h1>
+
+<p><img src="https://img.shields.io/github/workflow/status/wyhaines/find.cr/Find.cr%20CI?style=for-the-badge&logo=GitHub" alt="SplayTreeMap CI"/>
+<a href="https://github.com/wyhaines/find.cr/releases"><img src="https://img.shields.io/github/release/wyhaines/find.cr.svg?style=for-the-badge" alt="GitHub release"/></a>
+<img src="https://img.shields.io/github/commits-since/wyhaines/find.cr/latest?style=for-the-badge" alt="GitHub commits since latest release (by SemVer)"/></p>
+
+<p>This shard is inspired by the Ruby module:</p>
+
+<p>https://ruby-doc.org/stdlib-2.7.2/libdoc/find/rdoc/index.html</p>
+
+<p>It implements a simple API for the top down traversal of a set of paths.</p>
+
+<p>The API is simple.</p>
+
+<pre><code class="language-crystal">require 'find'
+
+total_size = 0
+
+Find.find(ENV["HOME"]) do |path|
+  if File.directory?(path)
+    if File.basename(path).start_with?('.')
+      Find.prune       # Don't look any further into this directory.
+    else
+      next
+    end
+  end
+
+  total_size += FileTest.size(path)
+end</code></pre>
+
+<p><img src="https://img.shields.io/github/languages/code-size/wyhaines/find.cr?style=for-the-badge" alt="GitHub code size in bytes"/>
+<img src="https://img.shields.io/github/issues/wyhaines/find.cr?style=for-the-badge" alt="GitHub issues"/></p>
+</div>
+</body>
+</html>
