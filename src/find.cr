@@ -12,7 +12,7 @@ module Find
         file = search_path.shift
 
         begin
-          next unless !file.nil? && File.exists?(file)
+          next if file.nil? || !File.exists?(file)
         rescue
           next
         end
