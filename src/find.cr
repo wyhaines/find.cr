@@ -27,7 +27,7 @@ module Find
             next
           end
 
-          fs.sort.reverse.each { |f| search_path.unshift(File.join(file, f)) }
+          fs.sort.reverse!.each { |f| search_path.unshift(File.join(file, f)) }
         end
       end
     end
