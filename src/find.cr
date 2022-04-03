@@ -7,23 +7,26 @@ module Find
 
   # Skips dangling symlinks for compatibility with ruby
   def self.find(*paths)
-    super(*paths) do |path|
+    find_with_stat(*paths) do |path, info|
       exists = File.exists?(path) rescue false
       yield(path) if exists
     end
   end
   
-  def self.find_all(*paths)
+  def self.find_with_info(*paths)
     paths.each do |path|
       search_path = [path]
       while !search_path.empty?
         file = search_path.shift
         next if file.nil?
 
-        skip = yield file.dup
+        info = File.info?(file)
+        next unless info # File deleted beteen list and now
+      
+        skip = yield file, info
         next if skip == Find::Skip
 
-        if File.directory?(file)
+        if info.directory?
           begin
             fs = Dir.children(file)
           rescue
