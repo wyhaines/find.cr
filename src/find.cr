@@ -7,7 +7,9 @@ class Find
     next Find::Skip
   end
 
-  # Skips dangling symlinks for compatibility with ruby
+  # For ruby compatibility
+  #
+  # * Skips dangling symlinks
   def self.find(*paths)
     paths = paths.compact_map { |path| Path[path] }
 
@@ -15,6 +17,10 @@ class Find
       exists = File.exists?(path) rescue false
       yield(path.to_s) if exists
     end
+  end
+
+  def self.new(*paths)
+    new paths.compact_map { |path| Path[path] }
   end
 
   def self.new(paths : Enumerable(String?))
