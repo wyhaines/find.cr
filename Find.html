@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.0.0">
+<meta name="generator" content="Crystal Docs 1.3.2">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="find">
 
@@ -75,17 +75,33 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Find
+  <span class="kind">class</span> Find
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Find.html">Find</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
 
+
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Enumerable({Path, File::Info})</li>
+    
+  </ul>
 
 
 
@@ -106,8 +122,15 @@
   </h2>
   
     
-      <a href="https://github.com/wyhaines/find.cr/blob/04ea31c8d7366ef5551c397ef7eb62205fb6cc78/src/find.cr#L1" target="_blank">
+      <a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L1" target="_blank">
         find.cr
+      </a>
+    
+    <br/>
+  
+    
+      <a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/version.cr#L1" target="_blank">
+        version.cr
       </a>
     
     <br/>
@@ -115,7 +138,53 @@
 
 
 
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="VERSION">
+        <strong>VERSION</strong> = <code><span class="s">&quot;2.0.0&quot;</span></code>
+      </dt>
+      
+    
+  </dl>
 
+
+
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28paths%3AEnumerable%28String%3F%29%29-class-method" class="signature"><strong>.new</strong>(paths : Enumerable(String?))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28paths%3AEnumerable%28Path%29%29-class-method" class="signature"><strong>.new</strong>(paths : Enumerable(Path))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28%2Apaths%29-class-method" class="signature"><strong>.new</strong>(*paths)</a>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -130,13 +199,34 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#find(*paths,&)-class-method" class="signature"><strong>.find</strong>(*paths, &)</a>
+        <a href="#find%28%2Apaths%2C%26%29-class-method" class="signature"><strong>.find</strong>(*paths, &)</a>
+        
+          <div class="summary"><p>For ruby compatibility</p></div>
         
       </li>
     
   </ul>
 
 
+
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#each%28%26%29-instance-method" class="signature"><strong>#each</strong>(&)</a>
+        
+          <div class="summary"><p>Must yield this collection's elements to the block.</p></div>
+        
+      </li>
+    
+  </ul>
 
 
 
@@ -161,8 +251,96 @@
 
 <div class="methods-inherited">
   
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
 </div>
 
+
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(paths:Enumerable(String?))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(paths : Enumerable(String?))
+
+        <a class="method-permalink" href="#new%28paths%3AEnumerable%28String%3F%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(paths:Enumerable(Path))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(paths : Enumerable(Path))
+
+        <a class="method-permalink" href="#new%28paths%3AEnumerable%28Path%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L30" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(*paths)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(*paths)
+
+        <a class="method-permalink" href="#new%28%2Apaths%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -180,19 +358,62 @@
         
         def self.<strong>find</strong>(*paths, &)
 
-        <a class="method-permalink" href="#find(*paths,&)-class-method">#</a>
+        <a class="method-permalink" href="#find%28%2Apaths%2C%26%29-class-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>For ruby compatibility</p>
+<ul>
+<li>Skips dangling symlinks</li>
+</ul>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/wyhaines/find.cr/blob/04ea31c8d7366ef5551c397ef7eb62205fb6cc78/src/find.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
 
+
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="each(&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(&)
+
+        <a class="method-permalink" href="#each%28%26%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable({Path, File::Info})
+            </div>
+          
+          <p>Must yield this collection's elements to the block.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
 
 
 
@@ -216,7 +437,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/wyhaines/find.cr/blob/04ea31c8d7366ef5551c397ef7eb62205fb6cc78/src/find.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/wyhaines/find.cr/blob/188449fcae7e8dfb40e6dbb5b6210b7473a4ca47/src/find.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>

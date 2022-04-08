@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Crystal Docs 1.0.0">
+<meta name="generator" content="Crystal Docs 1.3.2">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="find">
 
@@ -73,32 +73,45 @@
 
 
 <div class="main-content">
+<p><img src="https://img.shields.io/github/workflow/status/wyhaines/find.cr/Find.cr%20CI?style=for-the-badge&amp;logo=GitHub" alt="SplayTreeMap CI" />
+<a href="https://github.com/wyhaines/find.cr/releases"><img src="https://img.shields.io/github/release/wyhaines/find.cr.svg?style=for-the-badge" alt="GitHub release" /></a>
+<img src="https://img.shields.io/github/commits-since/wyhaines/find.cr/latest?style=for-the-badge" alt="GitHub commits since latest release (by SemVer)" /></p>
 <h1><a id="find.cr" class="anchor" href="#find.cr">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>find.cr</h1>
-
-<p><img src="https://img.shields.io/github/workflow/status/wyhaines/find.cr/Find.cr%20CI?style=for-the-badge&logo=GitHub" alt="SplayTreeMap CI"/>
-<a href="https://github.com/wyhaines/find.cr/releases"><img src="https://img.shields.io/github/release/wyhaines/find.cr.svg?style=for-the-badge" alt="GitHub release"/></a>
-<img src="https://img.shields.io/github/commits-since/wyhaines/find.cr/latest?style=for-the-badge" alt="GitHub commits since latest release (by SemVer)"/></p>
-
 <p>This shard is inspired by the Ruby module:</p>
-
 <p>https://ruby-doc.org/stdlib-2.7.2/libdoc/find/rdoc/index.html</p>
-
-<p>It implements a simple API for the top down traversal of a set of paths.</p>
-
+<p>It implements a simple API for the top down traversal of a set of paths, and it provides a convenience method for a simple-to-use matching system that depends on Crystal's file matching syntax.</p>
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+<ol>
+<li>
+<p>Add the dependency to your <code>shard.yml</code>:</p>
+<pre><code class="language-yaml">dependencies:
+  find:
+    github: wyhaines/find.cr</code></pre>
+</li>
+</ol>
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;find&quot;</span></code></pre>
 <p>The API is simple.</p>
-
-<pre><code class="language-crystal">require 'find'
+<pre><code class="language-crystal">require &#39;find&#39;
 
 total_size = 0
 
-Find.find(ENV["HOME"]) do |path|
+Find.find(ENV[&quot;HOME&quot;]) do |path|
   if File.directory?(path)
-    if File.basename(path).start_with?('.')
-      Find.prune       # Don't look any further into this directory.
+    if File.basename(path).start_with?(&#39;.&#39;)
+      Find.prune       # Don&#39;t look any further into this directory.
     else
       next
     end
@@ -106,9 +119,8 @@ Find.find(ENV["HOME"]) do |path|
 
   total_size += FileTest.size(path)
 end</code></pre>
-
-<p><img src="https://img.shields.io/github/languages/code-size/wyhaines/find.cr?style=for-the-badge" alt="GitHub code size in bytes"/>
-<img src="https://img.shields.io/github/issues/wyhaines/find.cr?style=for-the-badge" alt="GitHub issues"/></p>
+<p><img src="https://img.shields.io/github/languages/code-size/wyhaines/find.cr?style=for-the-badge" alt="GitHub code size in bytes" />
+<img src="https://img.shields.io/github/issues/wyhaines/find.cr?style=for-the-badge" alt="GitHub issues" /></p>
 </div>
 </body>
 </html>
