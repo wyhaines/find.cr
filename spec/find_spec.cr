@@ -70,10 +70,10 @@ describe Find do
 
   it "can prune entries out of the list of paths" do
     with_tmpdir do |tempdir|
-      File.open("#{tempdir}/a", "w"){}
+      File.open("#{tempdir}/a", "w") { }
       Dir.mkdir("#{tempdir}/b")
-      File.open("#{tempdir}/b/a", "w"){}
-      File.open("#{tempdir}/b/b", "w"){}
+      File.open("#{tempdir}/b/a", "w") { }
+      File.open("#{tempdir}/b/b", "w") { }
       Dir.mkdir("#{tempdir}/c")
       a = [] of String?
       Find.find(tempdir) do |f|

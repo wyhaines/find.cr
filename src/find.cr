@@ -1,35 +1,63 @@
-module Find
+class Find
+  include Enumerable({Path, File::Info})
+
   struct Skip; end
 
   macro prune
     next Find::Skip
   end
 
+  # For ruby compatibility
+  #
+  # * Skips dangling symlinks
   def self.find(*paths)
-    paths.each do |path|
-      search_path = [path]
+    paths = paths.compact_map { |path| Path[path] }
+
+    new(paths).each do |path, info|
+      exists = File.exists?(path) rescue false
+      yield(path.to_s) if exists
+    end
+  end
+
+  def self.new(*paths)
+    new paths.compact_map { |path| Path[path] }
+  end
+
+  def self.new(paths : Enumerable(String?))
+    new paths.compact_map { |path| Path.new(path) }
+  end
+
+  def initialize(@paths : Enumerable(Path))
+  end
+
+  def each
+    search_path = [] of Path
+    @paths.each do |path|
+      search_path << path
       while !search_path.empty?
-        file = search_path.shift
+        file = search_path.pop
 
-        begin
-          next if file.nil? || !File.exists?(file)
-        rescue
-          next
-        end
+        info = File.info?(file, follow_symlinks: false)
+        next unless info # File deleted beteen list and now
 
-        skip = yield file.dup
+        skip = yield({file.not_nil!, info.not_nil!})
         next if skip == Find::Skip
 
-        if File.directory?(file)
+        if info.directory?
           begin
             fs = Dir.children(file)
-          rescue
+          rescue ex
+            dir_children_error ex
             next
           end
 
-          fs.sort.reverse!.each { |f| search_path.unshift(File.join(file, f)) }
+          fs.sort.reverse!.each { |f| search_path.push(file.join(f)) }
         end
       end
     end
+  end
+
+  # Override
+  protected def dir_children_error(ex) : Nil
   end
 end
