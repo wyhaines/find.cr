@@ -20,8 +20,8 @@ jobs:
       run: shards install
     - name: Run tests
       run: crystal spec -s -t --error-trace
-    - name: Run Ameba
-      run: bin/ameba
+#    - name: Run Ameba
+#      run: bin/ameba
     - name: Build docs
       run: crystal docs
     - name: Deploy
