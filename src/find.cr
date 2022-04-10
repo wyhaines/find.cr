@@ -7,6 +7,8 @@ class Find
     next Find::Skip
   end
 
+  class RaceError < Exception; end
+
   # For ruby compatibility
   #
   # * Skips dangling symlinks
@@ -45,9 +47,15 @@ class Find
 
         if info.directory?
           begin
-            fs = Dir.children(file)
+            fs = Dir.open(file) do |dir|
+              {% if Dir.has_method?(:info) %} # Crystal >= 1.5.0?
+                dinfo = dir.info
+                raise RaceError.new unless dinfo.same_file?(info)
+              {% end %}
+              dir.children
+            end
           rescue ex
-            dir_children_error ex
+            dir_children_error file, ex
             next
           end
 
@@ -58,6 +66,7 @@ class Find
   end
 
   # Override
-  protected def dir_children_error(ex) : Nil
+  @[Experimental]
+  protected def dir_children_error(path, ex) : Nil
   end
 end
