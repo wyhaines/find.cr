@@ -28,8 +28,8 @@ end
 describe Find do
   it "works on an empty directory" do
     with_tmpdir do |tempdir|
-      a = [] of String?
-      Find.find(tempdir) { |f| a << f }
+      a = [] of String
+      Find.find(tempdir) { |f| a << f.to_s }
       a.should eq [tempdir]
     end
   end
@@ -37,7 +37,7 @@ describe Find do
   it "works if asked to find something that does not exist" do
     with_tmpdir do |tempdir|
       a = [] of String
-      Find.find(File.join(tempdir, "a")) { |f| a << f }
+      Find.find(File.join(tempdir, "a")) { |f| a << f.to_s }
       a.empty?.should be_true
     end
   end
@@ -49,8 +49,8 @@ describe Find do
       File.open("#{tempdir}/b/a", "w") { }
       File.open("#{tempdir}/b/b", "w") { }
       Dir.mkdir("#{tempdir}/c")
-      a = [] of String?
-      Find.find(tempdir) { |f| a << f }
+      a = [] of String
+      Find.find(tempdir) { |f| a << f.to_s }
       a.should eq [tempdir, "#{tempdir}/a", "#{tempdir}/b", "#{tempdir}/b/a", "#{tempdir}/b/b", "#{tempdir}/c"]
     end
   end
@@ -62,8 +62,8 @@ describe Find do
       File.open("#{tempdir}/b/a", "w") { }
       File.open("#{tempdir}/b/b", "w") { }
       Dir.mkdir("#{tempdir}/c")
-      a = [] of String?
-      Dir.cd(tempdir) { Find.find(".") { |f| a << f } }
+      a = [] of String
+      Dir.cd(tempdir) { Find.find(".") { |f| a << f.to_s } }
       a.should eq [".", "./a", "./b", "./b/a", "./b/b", "./c"]
     end
   end
@@ -75,10 +75,10 @@ describe Find do
       File.open("#{tempdir}/b/a", "w") { }
       File.open("#{tempdir}/b/b", "w") { }
       Dir.mkdir("#{tempdir}/c")
-      a = [] of String?
+      a = [] of String
       Find.find(tempdir) do |f|
-        a << f
-        Find.prune if f == "#{tempdir}/b"
+        a << f.to_s
+        Find.prune if f.to_s == "#{tempdir}/b"
       end
       a.should eq [tempdir, "#{tempdir}/a", "#{tempdir}/b", "#{tempdir}/c"]
     end

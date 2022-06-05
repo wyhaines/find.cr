@@ -16,8 +16,7 @@ class Find
     paths = paths.compact_map { |path| Path[path] }
 
     new(paths).each do |path, info|
-      exists = File.exists?(path) rescue false
-      yield(path.to_s) if exists
+      yield(path)
     end
   end
 
